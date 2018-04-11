@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using Recipes.Abstract;
 using Recipes.Domain;
 
-namespace Recipes
+namespace Recipes.Concrete
 {
-    class Application
+    class Application : IRunnable
     {
         RecipeBook ourRecipes;
 
@@ -19,7 +20,7 @@ namespace Recipes
 
         public void Run()
         {
-            var recipes = ourRecipes.RetrieveRecipe("this string doesn't matter");
+            var recipes = ourRecipes.RetrieveRecipe("Water");
 
             foreach (Recipe r in recipes)
             {

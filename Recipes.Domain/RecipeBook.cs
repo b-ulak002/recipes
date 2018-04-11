@@ -21,7 +21,17 @@ namespace Recipes.Domain
                                                       , Name     = "Bread" }
                                      , new Ingredient { Quantity = 0.5
                                                       , Unit     = "tbsp"
-                                                      , Name     = "Yeast" }}}};
+                                                      , Name     = "Yeast" }}}
+            , new Recipe { Name = "Water"
+                         , Summary = "Water"
+                         , Description = "HYDRATE"
+                         , Ingredients =
+                               new[] { new Ingredient { Quantity = 1
+                                                      , Unit = "atom"
+                                                      , Name = "Oxygen" }
+                                     , new Ingredient { Quantity = 2
+                                                      , Unit = "atoms"
+                                                      , Name = "Hydrogen" }}}};
 
         public void AddRecipe()
         { throw new NotImplementedException(); }
@@ -31,7 +41,9 @@ namespace Recipes.Domain
 
         public Recipe[] RetrieveRecipe(string name)
         {
-            return this.recipes; // TODO FIXME
+            return this.recipes
+                       .Where(x => x.Name == name)
+                       .ToArray();
         }
     }
 }
