@@ -8,40 +8,25 @@ namespace Recipes.Domain
 {
     public class RecipeBook
     {
-        Recipe[] recipes = new[]
-            { new Recipe { Name = "My Great Recipe"
-                         , Summary = "The best recipe you've never had"
-                         , Description = "Combine the ingredients in a large bathtub. Simmer until gelatinous. Eat with spork."
-                         , Ingredients =
-                               new[] { new Ingredient { Quantity = 5
-                                                      , Unit     = "cups"
-                                                      , Name     = "Sugar" }
-                                     , new Ingredient { Quantity = 5
-                                                      , Unit     = "loaves"
-                                                      , Name     = "Bread" }
-                                     , new Ingredient { Quantity = 0.5
-                                                      , Unit     = "tbsp"
-                                                      , Name     = "Yeast" }}}
-            , new Recipe { Name = "Water"
-                         , Summary = "Water"
-                         , Description = "HYDRATE"
-                         , Ingredients =
-                               new[] { new Ingredient { Quantity = 1
-                                                      , Unit = "atom"
-                                                      , Name = "Oxygen" }
-                                     , new Ingredient { Quantity = 2
-                                                      , Unit = "atoms"
-                                                      , Name = "Hydrogen" }}}};
+        Recipe[] recipes;
 
-        public void AddRecipe()
-        { throw new NotImplementedException(); }
+        int numRecipes = 0;
 
-        public void RemoveRecipe()
+        public RecipeBook()
+        {
+            recipes = new Recipe[1024];
+        }
+
+        public void AddRecipe(Recipe recipe) =>
+            recipes[numRecipes++] = recipe;
+
+        public void RemoveRecipe(string name)
         { throw new NotImplementedException(); }
 
         public Recipe[] RetrieveRecipe(string name)
         {
             return this.recipes
+                       .Take(numRecipes)
                        .Where(x => x.Name == name)
                        .ToArray();
         }
