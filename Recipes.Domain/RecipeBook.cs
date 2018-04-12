@@ -31,6 +31,17 @@ namespace Recipes.Domain
             }
         }
 
+        public void RemoveRecipe(RecipeCategory category)
+        {
+            for (int i = 0; i < numRecipes; ++i)
+            {
+                if (this.recipes[i].Category == category)
+                {
+                    RemoveElement(i);
+                }
+            }
+        }
+
         private void RemoveElement(int i)
         {
             if ((numRecipes != 0) && (i < numRecipes))
@@ -45,6 +56,14 @@ namespace Recipes.Domain
             return this.recipes
                        .Take(numRecipes)
                        .Where(x => x.Name == name)
+                       .ToArray();
+        }
+
+        public Recipe[] RetrieveRecipe(RecipeCategory category)
+        {
+            return this.recipes
+                       .Take(numRecipes)
+                       .Where(x => x.Category == category)
                        .ToArray();
         }
     }

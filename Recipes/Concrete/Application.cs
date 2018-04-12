@@ -24,6 +24,7 @@ namespace Recipes.Concrete
                     Name = "My Great Recipe",
                     Summary = "The best recipe you've never had",
                     Description = "Combine the ingredients in a large bathtub. Simmer until gelatinous. Eat with spork.",
+                    Category = RecipeCategory.Bread,
                     Ingredients = new[] { new Ingredient { Quantity = 5
                                                          , Unit     = "cups"
                                                          , Name     = "Sugar" }
@@ -39,6 +40,7 @@ namespace Recipes.Concrete
              new Recipe { Name = "Water"
                          , Summary = "Water"
                          , Description = "HYDRATE"
+                         , Category = RecipeCategory.Drinks
                          , Ingredients =
                                new[] { new Ingredient { Quantity = 1
                                                       , Unit = "atom"
@@ -50,24 +52,30 @@ namespace Recipes.Concrete
 
         public void Run()
         {
-            var recipes = ourRecipes.RetrieveRecipe("Water");
-
-            foreach (Recipe r in recipes)
-            {
-                Console.WriteLine(r);
-            }
+            PrintRecipes(ourRecipes.RetrieveRecipe("Water"));
 
             ourRecipes.RemoveRecipe("Water");
 
-            recipes = ourRecipes.RetrieveRecipe("Water");
+            PrintRecipes(ourRecipes.RetrieveRecipe("Water"));
 
+            PrintRecipes(ourRecipes.RetrieveRecipe(RecipeCategory.Bread));
+        }
+
+        void PrintRecipes(Recipe[] recipes)
+        {
             if (recipes.Length == 0)
             {
-                Console.WriteLine("There are no valid recipes with that name.");
+                Console.WriteLine("No valid recipes found.");
             }
             else
             {
                 Console.WriteLine($"{recipes.Length} recipes found");
+
+                foreach (Recipe r in recipes)
+                {
+                    Console.WriteLine(r);
+                    Console.WriteLine("\n--------------------\n");
+                }
             }
         }
     }
