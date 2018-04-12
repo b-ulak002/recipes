@@ -21,7 +21,24 @@ namespace Recipes.Domain
             recipes[numRecipes++] = recipe;
 
         public void RemoveRecipe(string name)
-        { throw new NotImplementedException(); }
+        {
+            for (int i = 0; i < numRecipes; ++i)
+            {
+                if (this.recipes[i].Name == name)
+                {
+                    RemoveElement(i);
+                }
+            }
+        }
+
+        private void RemoveElement(int i)
+        {
+            if ((numRecipes != 0) && (i < numRecipes))
+            {
+                this.recipes[i] = this.recipes[--numRecipes];
+                this.recipes[numRecipes] = null;
+            }
+        }
 
         public Recipe[] RetrieveRecipe(string name)
         {

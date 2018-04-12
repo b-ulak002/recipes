@@ -56,6 +56,19 @@ namespace Recipes.Concrete
             {
                 Console.WriteLine(r);
             }
+
+            ourRecipes.RemoveRecipe("Water");
+
+            recipes = ourRecipes.RetrieveRecipe("Water");
+
+            if (recipes.Length == 0)
+            {
+                Console.WriteLine("There are no valid recipes with that name.");
+            }
+            else
+            {
+                Console.WriteLine($"{recipes.Length} recipes found");
+            }
         }
     }
 }
